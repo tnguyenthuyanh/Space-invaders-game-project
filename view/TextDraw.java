@@ -3,6 +3,7 @@ package view;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.AlphaComposite;
 
 import model.GameElement;
 
@@ -18,6 +19,7 @@ public class TextDraw extends GameElement {
     }
     @Override
     public void render(Graphics2D g2) {
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.50f));
         g2.setColor(color);
         g2.setFont(new Font("Courier new", Font.BOLD, size));
         g2.drawString(text, x, y);

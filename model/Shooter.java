@@ -9,7 +9,7 @@ import view.GameBoard;
 public class Shooter extends GameElement {
 
     public static final int UNIT_MOVE = 10;
-    public static final int MAX_BULLETS = 3;
+    public static final int MAX_BULLETS = 6;
     public static final int MAX_LASER = 1;
 
     private ArrayList<GameElement> components = new ArrayList<>();
@@ -66,10 +66,10 @@ public class Shooter extends GameElement {
     public void removeWeaponsOutOfBound() {
         var remove = new ArrayList<GameElement>();
         for (var w: weapons) 
-            if (w.y + 15 < 0) remove.add(w);
-
+            if (w.y + 15 < 0) {
+                remove.add(w);
+            }
         weapons.removeAll(remove);
-
     }
 
     public int numOfBullets() {

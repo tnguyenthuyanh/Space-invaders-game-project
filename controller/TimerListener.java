@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import model.Bullet;
 import model.Laser;
 import model.Shooter;
+import model.statePattern.FireBulletState;
 import view.GameBoard;
 
 public class TimerListener implements ActionListener {
@@ -56,8 +57,9 @@ public class TimerListener implements ActionListener {
                 case KEY_SPACE:
                     if (shooter.canFireMoreBullet()) {
                         Bullet bullet = new Bullet(shooter.x, shooter.y, gameBoard);
-                        shooter.getWeapons().add(bullet);
                         bullets.add(bullet);
+                        shooter.getWeapons().add(bullet);
+                        bullet.setState(new FireBulletState(gameBoard, bullet));
                     }
                     break;
                 case KEY_CTRL:
@@ -78,13 +80,13 @@ public class TimerListener implements ActionListener {
 
         var remove = new ArrayList<Bullet>();
         for (var b: bullets) {
-            if (b.y < 0) {
+            if (b.y < enemyComposite.topEnd())
                 b.goNextState();
+            if (b.y + 15 < 0) 
                 remove.add(b);
-            }
         }
         bullets.removeAll(remove);
-        
+
         shooter.removeWeaponsOutOfBound();
         enemyComposite.removeBombsOutOfBound();
         enemyComposite.processCollision(shooter);
@@ -102,5 +104,4 @@ public class TimerListener implements ActionListener {
     public ArrayList<Bullet> getBullets() {
         return bullets;
     }
-    
 }

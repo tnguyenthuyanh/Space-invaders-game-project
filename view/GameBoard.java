@@ -83,7 +83,7 @@ public class GameBoard {
         southPanel.add(quitButton);
         cp.add(BorderLayout.SOUTH, southPanel);
 
-        canvas.getGameElements().add(new TextDraw("Click <Start> to Play", 100, 100, Color.YELLOW, 30));
+        canvas.getGameElements().add(new TextDraw("Click <Start> to Play", 150, 180, Color.YELLOW, 30));
 
         timerListener = new TimerListener(this);
         timer = new Timer(DELAY, timerListener);

@@ -7,6 +7,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import model.Bomb;
 import model.Bullet;
 import model.EnemyComposite;
 import model.ShooterElement;
@@ -20,6 +21,9 @@ public class ImageStore {
     public static BufferedImage shooter3;
     public static BufferedImage shooter4;
     public static BufferedImage bullet;
+    public static BufferedImage bullet2;
+    public static BufferedImage bomb;
+    public static BufferedImage explosion;
 
     static {
         // although images png in same folder with this file but the Main java runs from a different package 
@@ -31,6 +35,9 @@ public class ImageStore {
         shooter3 = readImage("model/images/shooter3.png", ShooterElement.SIZE, ShooterElement.SIZE);
         shooter4 = readImage("model/images/shooter4.png", ShooterElement.SIZE, ShooterElement.SIZE);
         bullet = readImage("model/images/bullet.png", Bullet.WIDTH, Bullet.HEIGHT);
+        bullet2 = readImage("model/images/bullet2.png", Bullet.WIDTH, Bullet.HEIGHT);
+        bomb = readImage("model/images/bomb.png", Bomb.SIZE, Bomb.SIZE*2);
+        explosion = readImage("model/images/explosion.png", 3, 3);
     }
     
     public static BufferedImage readImage(String path, int width, int height) {

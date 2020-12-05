@@ -97,14 +97,11 @@ public class EnemyComposite extends GameElement implements Subject {
         for (var row : rows) {
             var removeEnemies = new ArrayList<GameElement>();
             for (var enemy : row) {
-                for (var bullet : shooter.getWeapons()) {
-                    if (enemy.collideWith(bullet)) {
-                        if (bullet instanceof Laser) 
-                            removeEnemies.add(enemy);
-                        else {
-                            removeEnemies.add(enemy);
-                            removeBullets.add(bullet);
-                        }
+                for (var w : shooter.getWeapons()) {
+                    if (enemy.collideWith(w)) {
+                        if (w instanceof Bullet) 
+                            removeBullets.add(w);
+                        removeEnemies.add(enemy);  
                     }
                 }
             }
@@ -124,14 +121,11 @@ public class EnemyComposite extends GameElement implements Subject {
         removeBullets.clear();
 
         for (var b : bombs) {
-            for (var bullet : shooter.getWeapons()) {
-                if (b.collideWith(bullet)) {
-                    if (bullet instanceof Laser) 
-                        removeBombs.add(b);
-                    else {
-                        removeBombs.add(b);
-                        removeBullets.add(bullet);
-                    }
+            for (var w : shooter.getWeapons()) {
+                if (b.collideWith(w)) {
+                    if (w instanceof Bullet) 
+                        removeBullets.add(w);
+                    removeBombs.add(b);  
                 }
             }
         }
@@ -155,14 +149,6 @@ public class EnemyComposite extends GameElement implements Subject {
         bombs.removeAll(removeBombs);
         if (shooter.getComponents().size() == 0) 
             notifyObservers(Event.Lost);
-
-        if (shooter.numOfBullets() == 3) 
-            for (var c: shooter.getComponents())
-                c.color = Color.GREEN;
-        else 
-            for (var c: shooter.getComponents())
-                c.color = Color.WHITE;
-
 
     }
 
@@ -215,6 +201,16 @@ public class EnemyComposite extends GameElement implements Subject {
 
     public void setRenderStrategy(EnemyRenderStrategy renderStrategy) {
         this.renderStrategy = renderStrategy;
+    }
+
+    public int topEnd() {
+        int yEnd = 0;
+        for (var row: rows) {
+            if (row.size() == 0) continue;
+            yEnd = row.get(row.size() -1).y;
+            break;
+        }
+        return yEnd;
     }
 
 }
