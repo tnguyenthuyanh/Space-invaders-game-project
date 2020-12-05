@@ -90,6 +90,7 @@ public class GameBoard {
 
         startButton.addActionListener(event -> {
             stopButton.setEnabled(true);
+            stopButton.setText("Stop");
             timerListener.getBullets().clear();
             gameStatus = GameStatus.PLAYING;
             score = 0;
