@@ -1,8 +1,9 @@
 package model.strategyPattern;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import model.Enemy;
 import model.EnemyComposite;
+import model.images.ImageStore;
 
 public class EnemyRenderDeadStrategy implements EnemyRenderStrategy {
     
@@ -17,7 +18,8 @@ public class EnemyRenderDeadStrategy implements EnemyRenderStrategy {
         var rows = enemyComposite.getRows();
         for (var r: rows) {
             for (var e: r) {
-                e.color = Color.GRAY;
+                Enemy enemy = (Enemy) e;
+                enemy.setImage(ImageStore.alien1);
                 e.render(g2);
             }
         }

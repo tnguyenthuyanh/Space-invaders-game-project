@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import model.images.ImageStore;
 import model.statePattern.BulletState;
+import model.statePattern.FireBulletState;
 import view.GameBoard;
 
 public class Bullet extends GameElement {
@@ -18,6 +19,7 @@ public class Bullet extends GameElement {
 
     public Bullet(int x, int y, GameBoard gameBoard) {
         super(x, y-30, Color.RED, true, WIDTH, HEIGHT);
+        state = new FireBulletState(gameBoard, this);
     }
 
     @Override

@@ -59,13 +59,11 @@ public class TimerListener implements ActionListener {
                         Bullet bullet = new Bullet(shooter.x - 2, shooter.y, gameBoard);
                         bullets.add(bullet);
                         shooter.getWeapons().add(bullet);
-                        bullet.setState(new FireBulletState(gameBoard, bullet));
                         if (gameBoard.getEnemyComposite().isRedEnemyRemoved()) {
-                            bullet.x = shooter.x - 10;
+                            bullet.x = shooter.x - 11;
                             Bullet bullet2 = new Bullet(shooter.x + 8, shooter.y, gameBoard);
                             bullets.add(bullet2);
                             shooter.getWeapons().add(bullet2);
-                            bullet2.setState(new FireBulletState(gameBoard, bullet2));
                             gameBoard.getShooter().MAX_BULLETS = 18;
                         }
                     }
