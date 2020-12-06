@@ -27,6 +27,8 @@ public class EnemyComposite extends GameElement implements Subject {
     private ArrayList<Observer> observers = new ArrayList<>();
     private Random random = new Random();
     private int score = 0;
+    private int redEnemy;
+    private boolean redEnemyRemoved = false;
 
     private EnemyMoveStrategy moveStrategy;
     private EnemyRenderStrategy renderStrategy;
@@ -40,13 +42,17 @@ public class EnemyComposite extends GameElement implements Subject {
         rows = new ArrayList<>();
         bombs = new ArrayList<>();
 
+        redEnemy = new Random().nextInt(NCOLS);
         boolean filled = true;
         for (int r = 0; r < NROWS; r++) {
             var oneRow = new ArrayList<GameElement>();
             rows.add(oneRow);
             for (int c = 0; c < NCOLS; c++) {
                 filled = !filled;
-                oneRow.add(new Enemy(c * ENEMY_SIZE * 2, r * ENEMY_SIZE * 2, ENEMY_SIZE, Color.YELLOW, filled));
+                if (c == redEnemy && r == 0)
+                    oneRow.add(new Enemy(c * ENEMY_SIZE * 2, r * ENEMY_SIZE * 2, ENEMY_SIZE, Color.YELLOW, filled, true));
+                else 
+                    oneRow.add(new Enemy(c * ENEMY_SIZE * 2, r * ENEMY_SIZE * 2, ENEMY_SIZE, Color.YELLOW, filled, false));
             }
         }
         moveStrategy = new EnemyMoveAliveStrategy(this);
@@ -99,6 +105,9 @@ public class EnemyComposite extends GameElement implements Subject {
             for (var enemy : row) {
                 for (var w : shooter.getWeapons()) {
                     if (enemy.collideWith(w)) {
+                        Enemy enemy_cast = (Enemy) enemy;
+                        if (enemy_cast.redEnemy == true) 
+                            redEnemyRemoved = true;
                         if (w instanceof Bullet) 
                             removeBullets.add(w);
                         removeEnemies.add(enemy);  
@@ -211,6 +220,10 @@ public class EnemyComposite extends GameElement implements Subject {
             break;
         }
         return yEnd;
+    }
+
+    public boolean isRedEnemyRemoved() {
+        return redEnemyRemoved;
     }
 
 }

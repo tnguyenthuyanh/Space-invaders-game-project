@@ -6,13 +6,18 @@ import java.awt.Color;
 
 public class Enemy extends GameElement {
 
-    public Enemy(int x, int y, int size, Color color, boolean filled) {
+    public boolean redEnemy;
+
+    public Enemy(int x, int y, int size, Color color, boolean filled, boolean redEnemy) {
         super(x, y, color, filled, size, size);
+        this.redEnemy = redEnemy;
     }
 
     @Override
     public void render(Graphics2D g2) {
-        if (filled) 
+        if (redEnemy)
+            g2.drawImage(ImageStore.alien3, null, x, y);
+        else if (filled) 
             g2.drawImage(ImageStore.alien1, null, x, y);
         else 
             g2.drawImage(ImageStore.alien2, null, x, y);

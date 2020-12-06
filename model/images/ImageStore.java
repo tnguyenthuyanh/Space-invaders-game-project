@@ -16,6 +16,7 @@ public class ImageStore {
 
     public static BufferedImage alien1;
     public static BufferedImage alien2;
+    public static BufferedImage alien3;
     public static BufferedImage shooter1;
     public static BufferedImage shooter2;
     public static BufferedImage shooter3;
@@ -29,6 +30,7 @@ public class ImageStore {
         // -> put in path
         alien1 = readImage("model/images/alien1.png", EnemyComposite.ENEMY_SIZE, EnemyComposite.ENEMY_SIZE);
         alien2 = readImage("model/images/alien2.png", EnemyComposite.ENEMY_SIZE, EnemyComposite.ENEMY_SIZE);
+        alien3 = readImage("model/images/alien3.png", EnemyComposite.ENEMY_SIZE, EnemyComposite.ENEMY_SIZE);
         shooter1 = readImage("model/images/shooter1.png", ShooterElement.SIZE, ShooterElement.SIZE);
         shooter2 = readImage("model/images/shooter2.png", ShooterElement.SIZE, ShooterElement.SIZE);
         shooter3 = readImage("model/images/shooter3.png", ShooterElement.SIZE, ShooterElement.SIZE);
