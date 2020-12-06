@@ -20,6 +20,8 @@ public class EnemyComposite extends GameElement implements Subject {
     public static final int ENEMY_SIZE = 20;
     public static final int UNIT_MOVE = 5;
     public static final int UNIT_DOWN = 20;
+    public static final int UNIT_SCORE_ENEMY = 10;
+    public static final int UNIT_SCORE_BOMB = 5;
 
     private GameBoard gameBoard;
     private ArrayList<ArrayList<GameElement>> rows;
@@ -110,14 +112,15 @@ public class EnemyComposite extends GameElement implements Subject {
                             redEnemyRemoved = true;
                         if (w instanceof Bullet) 
                             removeBullets.add(w);
-                        removeEnemies.add(enemy);  
+                        if (!removeEnemies.contains(enemy))
+                            removeEnemies.add(enemy);  
                     }
                 }
             }
             row.removeAll(removeEnemies);
             if (row.size() == 0) empty++;
 
-            score = gameBoard.getScore() + removeEnemies.size() * 20;
+            score = gameBoard.getScore() + removeEnemies.size() * UNIT_SCORE_ENEMY;
             notifyObservers(Event.SetScore);
 
             if (empty == 2)
@@ -138,7 +141,7 @@ public class EnemyComposite extends GameElement implements Subject {
                 }
             }
         }
-        score = gameBoard.getScore() + removeBombs.size() * 5;
+        score = gameBoard.getScore() + removeBombs.size() * UNIT_SCORE_BOMB;
         notifyObservers(Event.SetScore);
         shooter.getWeapons().removeAll(removeBullets);
         bombs.removeAll(removeBombs);
