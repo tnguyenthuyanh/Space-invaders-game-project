@@ -23,7 +23,6 @@ public class ImageStore {
     public static BufferedImage bullet;
     public static BufferedImage bullet2;
     public static BufferedImage bomb;
-    public static BufferedImage explosion;
 
     static {
         // although images png in same folder with this file but the Main java runs from a different package 
@@ -37,7 +36,6 @@ public class ImageStore {
         bullet = readImage("model/images/bullet.png", Bullet.WIDTH, Bullet.HEIGHT);
         bullet2 = readImage("model/images/bullet2.png", Bullet.WIDTH, Bullet.HEIGHT);
         bomb = readImage("model/images/bomb.png", Bomb.SIZE, Bomb.SIZE*2);
-        explosion = readImage("model/images/explosion.png", 3, 3);
     }
     
     public static BufferedImage readImage(String path, int width, int height) {
